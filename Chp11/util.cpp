@@ -4,8 +4,8 @@
 #include <fstream> // 에런 (파일을 사용하기 위해)
 #include <iomanip>
 #include <iostream>
-#include <vector>
 
+#include "Vec.h"
 #include "analysis.h"
 #include "Student_info.h"
 
@@ -14,7 +14,6 @@ using namespace std;
 int printGreeting() {
 	cout << "Welcome to Student Gradebook!" << endl;
 	cout << "==============================" << endl << endl;
-
 	cout << "Which file would you like to load?" << endl;
 	cout << "1. Original grades.txt (20 students)" << endl;
 	cout << "2. All homework grades_did.txt (24 students)" << endl;
@@ -47,9 +46,9 @@ void printMenu() {
 }
 
 void loadGrades(ifstream& student_file, 
-	vector<Student_info>& students,
-	vector<Student_info>& did, 
-	vector<Student_info>& didnt,
+	Vec<Student_info>& students,
+	Vec<Student_info>& did, 
+	Vec<Student_info>& didnt,
 	string::size_type& maxlen) {
 
 	Student_info record;
@@ -75,12 +74,12 @@ void loadGrades(ifstream& student_file,
 }
 
 void fileSelect(int fileChoice,
-	vector<Student_info>& students,
-	vector<Student_info>& did,
-	vector<Student_info>& didnt,
+	Vec<Student_info>& students,
+	Vec<Student_info>& did,
+	Vec<Student_info>& didnt,
 	string::size_type& maxlen
 ) {
-	// Clear all vectors to start from scratch
+	// Clear all Vecs to start from scratch
 	students.clear();
 	did.clear();
 	didnt.clear();
@@ -101,7 +100,7 @@ void fileSelect(int fileChoice,
 		cout << "Invalid file choice.";
 }
 
-int checkHw(vector<Student_info>& did, vector<Student_info>& didnt) {
+int checkHw(Vec<Student_info>& did, Vec<Student_info>& didnt) {
 	cout << endl;
 
 	// 6장: 두 집단에 데이터가 있는지 각각 확인하여 분석할 필요가 있는지 확인
@@ -120,14 +119,14 @@ int checkHw(vector<Student_info>& did, vector<Student_info>& didnt) {
 }
 
 void write_analysis(ostream& out, const string& name,
-	double analysis(const vector<Student_info>&),
-	const vector<Student_info>& students, 
+	double analysis(const Vec<Student_info>&),
+	const Vec<Student_info>& students, 
 	string vec) {
 
 	out << name << ": median(" << vec << ") = " << analysis(students) << endl;
 }
 
-void analyzeGrades(vector<Student_info>& did, vector<Student_info>& didnt) {
+void analyzeGrades(Vec<Student_info>& did, Vec<Student_info>& didnt) {
 	cout << endl;
 
 	if (did.empty()) {
@@ -158,13 +157,13 @@ void analyzeGrades(vector<Student_info>& did, vector<Student_info>& didnt) {
 }
 
 
-void showScores(vector<Student_info>& students, string::size_type& maxlen) {
+void showScores(Vec<Student_info>& students, string::size_type& maxlen) {
 	cout << endl;
 
 	// 학생 정보를 알파벳순으로 정렬
 	sort(students.begin(), students.end(), compare);
 
-	for (vector<Student_info>::size_type i = 0;
+	for (Vec<Student_info>::size_type i = 0;
 		i != students.size(); ++i) {
 		// 이름과 오른쪽 공백을 포함하여 maxlen + 1개의
 		// 문자를 출력

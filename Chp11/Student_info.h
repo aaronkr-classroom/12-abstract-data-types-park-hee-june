@@ -6,18 +6,18 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include "Vec.h"
 
 using namespace std;
 
 struct Student_info {
     string name;
     double midterm, final;
-    vector<double> homework;
+    Vec<double> homework;
 }; // 세미콜론을 잊지 않도록 주의
 
 bool compare(const Student_info&, const Student_info&);
 istream& read(istream&, Student_info&);
-istream& read_hw(istream&, vector<double>&);
+istream& read_hw(istream&, Vec<double>&);
 
 #endif

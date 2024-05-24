@@ -9,12 +9,13 @@
 #include <iostream> // cin/cout을 사용하기 위해
 #include <stdexcept>
 #include <string>
-#include <vector>
+
 
 #include "analysis.h"
 #include "grade.h"
 #include "util.h"
 #include "Student_info.h"
+#include "Vec.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main() {
     ifstream student_file_didnt("grades_didnt.txt"); // 에런
 
     // 6장: 모든 과제를 제출한 학생과 그렇지 않은 학생
-    vector<Student_info> students, did, didnt;
+    Vec<Student_info> students, did, didnt;
     Student_info record;
     string::size_type maxlen = 0;
 
@@ -52,7 +53,7 @@ int main() {
     int fileChoice = printGreeting();
     // cout << fileChoice << typeid(fileChoice).name();
 
-    vector<Student_info> students, did, didnt;
+    Vec<Student_info> students, did, didnt;
     string::size_type maxlen = 0;
 
     fileSelect(fileChoice, students, did, didnt, maxlen);
